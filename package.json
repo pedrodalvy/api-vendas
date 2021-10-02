@@ -1,0 +1,7 @@
+{
+  "name": "api-vendas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Pedro Dalvy <pedrodalvy@outlook.com>",
+  "license": "MIT"
+}
