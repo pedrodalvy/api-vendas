@@ -6,6 +6,7 @@ export default {
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   migrations: ['./src/shared/typeorm/migrations/*.ts'],
+  entities: ['./src/modules/**/typeorm/entities/*.ts'],
   cli: {
     migrationsDir: './src/shared/typeorm/migrations',
   },
