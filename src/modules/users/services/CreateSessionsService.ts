@@ -3,6 +3,7 @@ import { UsersRepository } from '@modules/users/typeorm/repositories/UsersReposi
 import { User } from '@modules/users/typeorm/entities/User';
 import { AppError } from '@shared/errors/AppError';
 import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
 
 interface IRequest {
   email: string;
@@ -11,6 +12,7 @@ interface IRequest {
 
 interface IResponse {
   user: User;
+  token: string;
 }
 
 export class CreateSessionsService {
@@ -28,6 +30,11 @@ export class CreateSessionsService {
       throw new AppError('Incorrect email/password combination.', 401);
     }
 
-    return { user };
+    const token = sign({}, String(process.env.SECRET_KEY), {
+      subject: user.id,
+      expiresIn: process.env.SECRET_EXPIRES,
+    });
+
+    return { user, token };
   }
 }

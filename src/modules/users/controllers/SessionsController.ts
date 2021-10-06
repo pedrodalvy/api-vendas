@@ -6,8 +6,8 @@ export class SessionsController {
     const { email, password } = request.body;
 
     const service = new CreateSessionsService();
-    const { user } = await service.execute({ email, password });
+    const { user, token } = await service.execute({ email, password });
 
-    return response.json(user);
+    return response.json({ user, token });
   }
 }
