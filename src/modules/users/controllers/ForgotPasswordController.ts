@@ -8,6 +8,6 @@ export class ForgotPasswordController {
     const service = new SendForgotPasswordEmailService();
     await service.execute({ email });
 
-    return response.status(204);
+    return response.status(204).send();
   }
 }
