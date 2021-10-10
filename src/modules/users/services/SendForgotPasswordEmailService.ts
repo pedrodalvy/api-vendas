@@ -21,6 +21,16 @@ export class SendForgotPasswordEmailService {
     const userTokenRepository = getCustomRepository(UserTokensRepository);
     const token = await userTokenRepository.generate(user.id);
 
-    await EtherealMail.sendMail({ to: email, body: `🚀 ${token.token}` });
+    await EtherealMail.sendMail({
+      to: { name: user.name, email: user.email },
+      subject: 'Password recovery',
+      templateData: {
+        template: `<p> Name: {{name}}</p><p> Token: {{token}}</p>`,
+        variables: {
+          name: user.name,
+          token: token.token,
+        },
+      },
+    });
   }
 }
