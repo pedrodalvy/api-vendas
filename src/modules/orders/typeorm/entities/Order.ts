@@ -4,10 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Customer } from '@modules/customers/typeorm/entities/Customer';
+import { OrdersProducts } from '@modules/products/typeorm/entities/OrdersProducts';
 
 @Entity('orders')
 export class Order {
@@ -26,4 +28,9 @@ export class Order {
   @ManyToOne(() => Customer)
   @JoinColumn({ name: 'customer_id' })
   customer: Customer;
+
+  @OneToMany(() => OrdersProducts, order_products => order_products.order, {
+    cascade: true,
+  })
+  order_products: OrdersProducts[];
 }
