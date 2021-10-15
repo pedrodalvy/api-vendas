@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -9,6 +10,7 @@ import {
 import { Order } from '@modules/orders/typeorm/entities/Order';
 import { Product } from '@modules/products/typeorm/entities/Product';
 
+@Entity('orders_products')
 export class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
