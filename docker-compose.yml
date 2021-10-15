@@ -16,7 +16,7 @@ services:
   db:
     build: .docker/postgres
     container_name: apivendas-db
-    restart: always
+    restart: on-failure
     tty: true
     ports:
       - "${POSTGRES_PORT}:5432"
