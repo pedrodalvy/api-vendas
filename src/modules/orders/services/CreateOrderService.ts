@@ -73,11 +73,11 @@ export class CreateOrderService {
 
     const { order_products } = order;
     const updatedProductQuantity = order_products.map(product => ({
-      id: product.id,
+      id: product.product_id,
       quantity:
         <number>(
           existsProducts
-            .filter(existProduct => existProduct.id === product.id)
+            .filter(existProduct => existProduct.id === product.product_id)
             .shift()?.quantity
         ) - product.quantity,
     }));

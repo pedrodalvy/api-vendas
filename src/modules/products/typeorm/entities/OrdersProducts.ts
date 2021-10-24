@@ -24,9 +24,6 @@ export class OrdersProducts {
   @Column()
   product_id: string;
 
-  @Column()
-  customer_id: string;
-
   @CreateDateColumn()
   created_at: Date;
 
