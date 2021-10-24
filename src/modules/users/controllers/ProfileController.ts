@@ -1,13 +1,14 @@
 import { Request, Response } from 'express';
 import { ShowProfileService } from '@modules/users/services/ShowProfileService';
 import { UpdateProfileService } from '@modules/users/services/UpdateProfileService';
+import { classToClass } from 'class-transformer';
 
 export class ProfileController {
   public async show(request: Request, response: Response): Promise<Response> {
     const service = new ShowProfileService();
     const user = await service.execute({ userId: request.user.id });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
@@ -23,6 +24,6 @@ export class ProfileController {
       oldPassword,
     });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 }
