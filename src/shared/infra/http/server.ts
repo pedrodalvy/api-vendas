@@ -4,12 +4,12 @@ import express, { NextFunction, Request, Response } from 'express';
 import 'express-async-errors';
 import cors from 'cors';
 import { errors } from 'celebrate';
-import routes from '@shared/http/routes';
+import routes from '@shared/infra/http/routes';
 import { AppError } from '@shared/errors/AppError';
 import '@shared/typeorm';
 import { uploadConfig } from '@config/upload';
 import { pagination } from 'typeorm-pagination';
-import rateLimiter from '@shared/http/middlewares/rateLimiter';
+import rateLimiter from '@shared/infra/http/middlewares/rateLimiter';
 
 const app = express();
 
