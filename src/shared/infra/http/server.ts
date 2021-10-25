@@ -11,6 +11,7 @@ import '@shared/container';
 import { uploadConfig } from '@config/upload';
 import { pagination } from 'typeorm-pagination';
 import rateLimiter from '@shared/infra/http/middlewares/rateLimiter';
+import { env } from 'node:process';
 
 const app = express();
 
@@ -32,9 +33,11 @@ app.use(
       });
     }
 
+    const isProduction = env.APP_ENV === 'production';
+
     return res.status(500).json({
       status: 'error',
-      message: 'Internal server error.',
+      message: isProduction ? 'Internal server error.' : error,
     });
   },
 );
