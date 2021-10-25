@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Customer } from '@modules/customers/typeorm/entities/Customer';
+import { Customer } from '@modules/customers/infra/typeorm/entities/Customer';
 import { OrdersProducts } from '@modules/products/typeorm/entities/OrdersProducts';
 
 @Entity('orders')

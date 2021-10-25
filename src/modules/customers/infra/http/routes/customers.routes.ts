@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { CustomersController } from '@modules/customers/controllers/CustomersController';
+import { CustomersController } from '@modules/customers/infra/http/controllers/CustomersController';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { isAuthenticated } from '@shared/infra/http/middlewares/isAuthenticated';
 
