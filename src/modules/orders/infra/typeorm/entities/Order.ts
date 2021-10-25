@@ -1,5 +1,4 @@
 import {
-  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -10,14 +9,12 @@ import {
 } from 'typeorm';
 import { Customer } from '@modules/customers/infra/typeorm/entities/Customer';
 import { OrdersProducts } from '@modules/products/infra/typeorm/entities/OrdersProducts';
+import { IOrder } from '@modules/orders/domain/models/IOrder';
 
 @Entity('orders')
-export class Order {
+export class Order implements IOrder {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-
-  @Column()
-  customer_id: string;
 
   @CreateDateColumn()
   created_at: Date;

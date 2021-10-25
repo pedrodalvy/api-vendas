@@ -3,7 +3,6 @@ import { ICreateOrderProducts } from '@modules/orders/domain/models/ICreateOrder
 
 export interface IOrder {
   id: string;
-  order: number;
   customer: ICustomer;
   order_products: ICreateOrderProducts[];
   created_at: Date;
