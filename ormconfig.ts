@@ -1,12 +1,17 @@
+import * as dotenv from 'dotenv';
+import { env } from 'node:process';
+
+dotenv.config();
+
 export default {
-  type: process.env.DB_CONNECTION,
-  host: process.env.POSTGRES_HOST,
-  port: process.env.POSTGRES_PORT,
-  username: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
-  migrations: ['./src/shared/typeorm/migrations/*.ts'],
-  entities: ['./src/modules/**/typeorm/entities/*.ts'],
+  type: env.DB_CONNECTION,
+  host: env.POSTGRES_HOST,
+  port: env.POSTGRES_PORT,
+  username: env.POSTGRES_USER,
+  password: env.POSTGRES_PASSWORD,
+  database: env.POSTGRES_DB,
+  migrations: ['./dist/shared/typeorm/migrations/*.js'],
+  entities: ['./dist/modules/**/typeorm/entities/*.js'],
   cli: {
     migrationsDir: './src/shared/typeorm/migrations',
   },
