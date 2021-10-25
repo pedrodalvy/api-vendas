@@ -3,7 +3,6 @@
 .docker/dbdata
 node_modules
 build/
-temp/
 .env
 coverage
 ormconfig.json

@@ -5,6 +5,7 @@ import path from 'node:path';
 import { uploadConfig } from '@config/upload';
 import * as fs from 'node:fs';
 import { User } from '@modules/users/typeorm/entities/User';
+import { DiskStorageProvider } from '@shared/providers/StorageProvider/DiskStorageProvider';
 
 interface IRequest {
   avatarFileName: string;
@@ -14,6 +15,8 @@ interface IRequest {
 export class UpdateUserAvatarService {
   public async execute({ userId, avatarFileName }: IRequest): Promise<User> {
     const repository = getCustomRepository(UsersRepository);
+    const storageProvider = new DiskStorageProvider();
+
     const user = await repository.findById(userId);
 
     if (!user) {
@@ -21,20 +24,12 @@ export class UpdateUserAvatarService {
     }
 
     if (user.avatar) {
-      await this.removePreviousAvatar(user);
+      await storageProvider.deleteFile(user.avatar);
     }
 
-    user.avatar = avatarFileName;
+    const filename = await storageProvider.saveFile(avatarFileName);
+    user.avatar = filename;
 
     return await repository.save(user);
-  }
-
-  private async removePreviousAvatar(user: User): Promise<void> {
-    const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
-    const userAvatarFileExists = await fs.promises.stat(userAvatarFilePath);
-
-    if (userAvatarFileExists) {
-      await fs.promises.unlink(userAvatarFilePath);
-    }
   }
 }
