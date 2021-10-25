@@ -1,20 +1,22 @@
-import { getCustomRepository } from 'typeorm';
-import { CustomersRepository } from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
 import { AppError } from '@shared/errors/AppError';
+import { IDeleteCustomer } from '@modules/customers/domain/models/IDeleteCustomer';
+import { inject, injectable } from 'tsyringe';
+import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 
-interface IRequest {
-  customerId: string;
-}
-
+@injectable()
 export class DeleteCustomerService {
-  public async execute({ customerId }: IRequest): Promise<void> {
-    const repository = await getCustomRepository(CustomersRepository);
-    const customer = await repository.findById(customerId);
+  constructor(
+    @inject('CustomersRepository')
+    private customersRepository: ICustomersRepository,
+  ) {}
+
+  public async execute({ id }: IDeleteCustomer): Promise<void> {
+    const customer = await this.customersRepository.findById(id);
 
     if (!customer) {
       throw new AppError('Customer not found.');
     }
 
-    await repository.remove(customer);
+    await this.customersRepository.remove(customer);
   }
 }

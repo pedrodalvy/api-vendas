@@ -22,19 +22,19 @@ customersRouter.post(
 );
 
 customersRouter.get(
-  '/:customerId',
+  '/:id',
   celebrate({
     [Segments.PARAMS]: {
-      customerId: Joi.string().uuid().required(),
+      id: Joi.string().uuid().required(),
     },
   }),
   customersController.show,
 );
 
 customersRouter.put(
-  '/:customerId',
+  '/:id',
   celebrate({
-    [Segments.PARAMS]: { customerId: Joi.string().uuid().required() },
+    [Segments.PARAMS]: { id: Joi.string().uuid().required() },
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
@@ -44,10 +44,10 @@ customersRouter.put(
 );
 
 customersRouter.delete(
-  '/:customerId',
+  '/:id',
   celebrate({
     [Segments.PARAMS]: {
-      customerId: Joi.string().uuid().required(),
+      id: Joi.string().uuid().required(),
     },
   }),
   customersController.delete,
