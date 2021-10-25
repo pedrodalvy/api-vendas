@@ -4,6 +4,8 @@ import { UserTokensRepository } from '@modules/users/typeorm/repositories/UserTo
 import { AppError } from '@shared/errors/AppError';
 import { EtherealMail } from '@config/mail/EtherealMail';
 import path from 'node:path';
+import { mailConfig } from '@config/mail/mail';
+import { SESMail } from '@config/mail/SESMail';
 
 interface IRequest {
   email: string;
@@ -28,6 +30,22 @@ export class SendForgotPasswordEmailService {
       'views',
       'forgot_password.hbs',
     );
+
+    if (mailConfig.driver === 'ses') {
+      await SESMail.sendMail({
+        to: { name: user.name, email: user.email },
+        subject: 'Password recovery',
+        templateData: {
+          file: forgotPasswordTemplate,
+          variables: {
+            name: user.name,
+            link: `${process.env.APP_WEB_URL}/reset_password?token=${newToken.token}`,
+          },
+        },
+      });
+
+      return;
+    }
 
     await EtherealMail.sendMail({
       to: { name: user.name, email: user.email },
