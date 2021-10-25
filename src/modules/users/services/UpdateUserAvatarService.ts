@@ -1,11 +1,10 @@
 import { getCustomRepository } from 'typeorm';
 import { UsersRepository } from '@modules/users/typeorm/repositories/UsersRepository';
 import { AppError } from '@shared/errors/AppError';
-import path from 'node:path';
 import { uploadConfig } from '@config/upload';
-import * as fs from 'node:fs';
 import { User } from '@modules/users/typeorm/entities/User';
 import { DiskStorageProvider } from '@shared/providers/StorageProvider/DiskStorageProvider';
+import { S3StorageProvider } from '@shared/providers/StorageProvider/S3StorageProvider';
 
 interface IRequest {
   avatarFileName: string;
@@ -15,7 +14,10 @@ interface IRequest {
 export class UpdateUserAvatarService {
   public async execute({ userId, avatarFileName }: IRequest): Promise<User> {
     const repository = getCustomRepository(UsersRepository);
-    const storageProvider = new DiskStorageProvider();
+    const storageProvider =
+      uploadConfig.driver === 's3'
+        ? new S3StorageProvider()
+        : new DiskStorageProvider();
 
     const user = await repository.findById(userId);
 
