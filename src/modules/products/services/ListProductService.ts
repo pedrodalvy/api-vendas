@@ -1,6 +1,6 @@
-import { Product } from '@modules/products/typeorm/entities/Product';
+import { Product } from '@modules/products/infra/typeorm/entities/Product';
 import { getCustomRepository } from 'typeorm';
-import { ProductsRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
+import { ProductsRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 import { IPagination } from '@shared/interfaces/IPagination';
 import redisCache from '@shared/cache/RedisCache';
 

@@ -2,7 +2,7 @@ import { Order } from '@modules/orders/typeorm/entities/Order';
 import { getCustomRepository } from 'typeorm';
 import { OrdersRepository } from '@modules/orders/typeorm/repositories/OrdersRepository';
 import { CustomersRepository } from '@modules/customers/infra/typeorm/repositories/CustomersRepository';
-import { ProductsRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
+import { ProductsRepository } from '@modules/products/infra/typeorm/repositories/ProductsRepository';
 import { AppError } from '@shared/errors/AppError';
 
 interface IProduct {
