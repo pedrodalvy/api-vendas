@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { OrdersController } from '@modules/orders/controllers/OrdersController';
+import { OrdersController } from '@modules/orders/infra/http/controllers/OrdersController';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { isAuthenticated } from '@shared/infra/http/middlewares/isAuthenticated';
 

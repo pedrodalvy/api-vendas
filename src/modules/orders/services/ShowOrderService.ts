@@ -1,6 +1,6 @@
-import { Order } from '@modules/orders/typeorm/entities/Order';
+import { Order } from '@modules/orders/infra/typeorm/entities/Order';
 import { getCustomRepository } from 'typeorm';
-import { OrdersRepository } from '@modules/orders/typeorm/repositories/OrdersRepository';
+import { OrdersRepository } from '@modules/orders/infra/typeorm/repositories/OrdersRepository';
 import { AppError } from '@shared/errors/AppError';
 
 interface IRequest {
