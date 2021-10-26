@@ -1,7 +1,7 @@
 export interface IUpdateProfile {
-  user_id: string;
+  id: string;
   name: string;
   email: string;
   password?: string;
-  old_password?: string;
+  oldPassword?: string;
 }
