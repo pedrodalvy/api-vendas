@@ -25,6 +25,7 @@
       "src/@types"
     ],
     "types": [
+      "@types/jest",
       "node"
     ],
     "resolveJsonModule": true,
