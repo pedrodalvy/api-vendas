@@ -14,4 +14,8 @@ export default {
       isolatedModules: true,
     },
   },
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/modules/**/services/*.ts'],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text-summary', 'lcov'],
 };
