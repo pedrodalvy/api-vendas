@@ -3,6 +3,7 @@ import { IPagination } from '@shared/interfaces/IPagination';
 import { ICreateCustomer } from '@modules/customers/domain/models/ICreateCustomer';
 import { ICustomer } from '@modules/customers/domain/models/ICustomer';
 import { v4 as uuidv4 } from 'uuid';
+import { makePaginatedResponseMock } from '@shared/helpers/PaginationHelper';
 
 export class FakeCustomersRepository implements ICustomersRepository {
   private readonly customers: ICustomer[] = [];
@@ -48,7 +49,7 @@ export class FakeCustomersRepository implements ICustomersRepository {
   }
 
   public async findAllPaginate(): Promise<IPagination<ICustomer[]>> {
-    throw new Error('Method not implemented.');
+    return makePaginatedResponseMock(this.customers);
   }
 
   public async remove(customer: ICustomer): Promise<void> {
