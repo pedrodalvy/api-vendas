@@ -9,4 +9,9 @@ export default {
   }),
   preset: 'ts-jest',
   testMatch: ['**/*.spec.ts'],
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
 };
