@@ -1,14 +1,20 @@
 import 'reflect-metadata';
 import { FakeCustomersRepository } from '@modules/customers/domain/repositories/fakes/FakeCustomerRepository';
 import { CreateCustomerService } from '@modules/customers/services/CreateCustomerService';
-import { CustomersHelper } from '@shared/helpers/CustomersHelper';
+import { makeAValidUserMock } from '@shared/helpers/CustomersHelper';
 import { AppError } from '@shared/errors/AppError';
+import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 
 describe('CreateCustomerService', () => {
-  describe('When execute method be called', () => {
-    const mockRepository = new FakeCustomersRepository();
-    const createCustomerService = new CreateCustomerService(mockRepository);
+  let mockRepository: ICustomersRepository;
+  let createCustomerService: CreateCustomerService;
 
+  beforeEach(() => {
+    mockRepository = new FakeCustomersRepository();
+    createCustomerService = new CreateCustomerService(mockRepository);
+  });
+
+  describe('When execute method be called', () => {
     it('should be able to create a new customer', async () => {
       const customer = await createCustomerService.execute({
         name: 'valid name',
@@ -19,7 +25,7 @@ describe('CreateCustomerService', () => {
     });
 
     it('should not be able to create a two customer with the same email', async () => {
-      const mockCustomer = CustomersHelper.giveMeAValidCustomer();
+      const mockCustomer = makeAValidUserMock();
       await mockRepository.create(mockCustomer);
 
       createCustomerService
