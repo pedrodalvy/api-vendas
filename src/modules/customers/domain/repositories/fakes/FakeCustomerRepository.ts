@@ -53,6 +53,10 @@ export class FakeCustomersRepository implements ICustomersRepository {
   }
 
   public async remove(customer: ICustomer): Promise<void> {
-    throw new Error('Method not implemented.');
+    const customerIndex = this.customers.findIndex(
+      findCustomer => findCustomer.id === customer.id,
+    );
+
+    this.customers.splice(customerIndex, 1);
   }
 }
