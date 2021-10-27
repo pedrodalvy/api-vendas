@@ -28,12 +28,15 @@ describe('CreateCustomerService', () => {
       const mockCustomer = makeAValidUserMock();
       await mockRepository.create(mockCustomer);
 
-      createCustomerService
-        .execute({ name: 'any name', email: mockCustomer.email })
-        .catch(error => {
-          expect(error).toBeInstanceOf(AppError);
-          expect(error.message).toEqual('Email address already used.');
-        });
+      const promiseResponse = createCustomerService.execute({
+        name: 'any name',
+        email: mockCustomer.email,
+      });
+
+      await expect(promiseResponse).rejects.toBeInstanceOf(AppError);
+      promiseResponse.catch(error => {
+        expect(error.message).toEqual('Email address already used.');
+      });
     });
   });
 });

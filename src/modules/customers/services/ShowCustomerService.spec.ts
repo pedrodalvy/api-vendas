@@ -31,8 +31,8 @@ describe('ShowCustomerService', () => {
         id: 'nonexistent_id',
       });
 
+      await expect(promiseResponse).rejects.toBeInstanceOf(AppError);
       promiseResponse.catch(error => {
-        expect(error).toBeInstanceOf(AppError);
         expect(error.message).toEqual('Customer not found.');
       });
     });
