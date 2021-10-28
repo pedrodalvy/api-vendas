@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 import { DeleteCustomerService } from '@modules/customers/services/DeleteCustomerService';
 import { FakeCustomersRepository } from '@modules/customers/domain/repositories/fakes/FakeCustomerRepository';
-import { makeAValidUserMock } from '@shared/helpers/CustomersHelper';
+import { makeAValidCustomerMock } from '@shared/helpers/CustomersHelper';
 import { AppError } from '@shared/errors/AppError';
 
 describe('DeleteCustomerService', () => {
@@ -16,7 +16,7 @@ describe('DeleteCustomerService', () => {
 
   describe('When execute method be called', () => {
     it('should remove a customer', async () => {
-      const mockCustomer = makeAValidUserMock();
+      const mockCustomer = makeAValidCustomerMock();
       const customer = await mockRepository.create(mockCustomer);
 
       await deleteCustomerService.execute({ id: customer.id });

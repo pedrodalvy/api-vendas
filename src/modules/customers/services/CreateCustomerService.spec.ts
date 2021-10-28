@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { FakeCustomersRepository } from '@modules/customers/domain/repositories/fakes/FakeCustomerRepository';
 import { CreateCustomerService } from '@modules/customers/services/CreateCustomerService';
-import { makeAValidUserMock } from '@shared/helpers/CustomersHelper';
+import { makeAValidCustomerMock } from '@shared/helpers/CustomersHelper';
 import { AppError } from '@shared/errors/AppError';
 import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 
@@ -25,7 +25,7 @@ describe('CreateCustomerService', () => {
     });
 
     it('should not be able to create a two customer with the same email', async () => {
-      const mockCustomer = makeAValidUserMock();
+      const mockCustomer = makeAValidCustomerMock();
       await mockRepository.create(mockCustomer);
 
       const promiseResponse = createCustomerService.execute({

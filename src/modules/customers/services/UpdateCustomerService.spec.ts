@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 import { UpdateCustomerService } from '@modules/customers/services/UpdateCustomerService';
 import { FakeCustomersRepository } from '@modules/customers/domain/repositories/fakes/FakeCustomerRepository';
-import { makeAValidUserMock } from '@shared/helpers/CustomersHelper';
+import { makeAValidCustomerMock } from '@shared/helpers/CustomersHelper';
 import { AppError } from '@shared/errors/AppError';
 
 describe('UpdateCustomerService', () => {
@@ -16,7 +16,7 @@ describe('UpdateCustomerService', () => {
 
   describe('When execute method be called', () => {
     it('should update a customer', async () => {
-      const mockCustomer = makeAValidUserMock();
+      const mockCustomer = makeAValidCustomerMock();
       const customer = await mockRepository.create(mockCustomer);
 
       const updatedCustomer = await updateCustomerService.execute({
@@ -34,7 +34,7 @@ describe('UpdateCustomerService', () => {
 
     it('should not update a customer with the same email of another customer', async () => {
       await mockRepository.create({ name: 'First', email: 'first@email.com' });
-      const mockCustomer = makeAValidUserMock();
+      const mockCustomer = makeAValidCustomerMock();
       const customer = await mockRepository.create(mockCustomer);
 
       const promiseResponse = updateCustomerService.execute({

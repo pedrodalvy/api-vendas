@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { makeAValidUserMock } from '@shared/helpers/CustomersHelper';
+import { makeAValidCustomerMock } from '@shared/helpers/CustomersHelper';
 import { ICustomersRepository } from '@modules/customers/domain/repositories/ICustomersRepository';
 import { ShowCustomerService } from '@modules/customers/services/ShowCustomerService';
 import { FakeCustomersRepository } from '@modules/customers/domain/repositories/fakes/FakeCustomerRepository';
@@ -16,7 +16,7 @@ describe('ShowCustomerService', () => {
 
   describe('When execute method be called', () => {
     it('should show the searched customer', async () => {
-      const mockCustomer = makeAValidUserMock();
+      const mockCustomer = makeAValidCustomerMock();
       const expectedCustomer = await mockRepository.create(mockCustomer);
 
       const customer = await showCustomerService.execute({
