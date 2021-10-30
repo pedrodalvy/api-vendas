@@ -2,7 +2,7 @@ import { IHashProvider } from '@modules/users/providers/HashProvider/models/IHas
 
 export class FakeHashProvider implements IHashProvider {
   async compareHash(payload: string, hashed: string): Promise<boolean> {
-    return payload === hashed;
+    return true;
   }
 
   async generateHash(payload: string): Promise<string> {
